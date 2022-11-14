@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="estilo.css">
+    <title>Historicos</title>
+    
+</head>
+<body>
+    <header>
+
+        <div class="container__menu">
+            <div class="menu">
+                <i class="fas fa-bars" id="btn_menu"></i>
+                <div id="back_menu"></div>
+                <nav id="nav">
+                    <ul>
+                        <li><a href="../" id="selected">Inicio</a></li>
+                        <li><a href="../historicos">Historicos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+    <script>
+        document.getElementById("btn_menu").addEventListener("click", mostrar_menu);
+
+document.getElementById("back_menu").addEventListener("click", ocultar_menu);
+
+nav = document.getElementById("nav");
+background_menu = document.getElementById("back_menu");
+
+function mostrar_menu(){
+
+    nav.style.right = "0px";
+    background_menu.style.display = "block";
+}
+
+function ocultar_menu(){
+
+    nav.style.right = "-250px";
+    background_menu.style.display = "none";
+}
+
+
+    </script>
+</body>
+</html>

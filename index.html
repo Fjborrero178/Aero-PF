@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="estilo.css">
+    <title>Inicio</title>
+    
+</head>
+<body>
+    <header>
+
+        <div class="container__menu">
+            <div class="menu">
+                <i class="fas fa-bars" id="btn_menu"></i>
+                <div id="back_menu"></div>
+                <nav id="nav">
+                    <ul>
+                        <li><a href="#" id="selected">Inicio</a></li>
+                        <li><a href="../historicos">Historicos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+    <script>
+        document.getElementById("btn_menu").addEventListener("click", mostrar_menu);
+
+document.getElementById("back_menu").addEventListener("click", ocultar_menu);
+
+nav = document.getElementById("nav");
+background_menu = document.getElementById("back_menu");
+
+function mostrar_menu(){
+
+    nav.style.right = "0px";
+    background_menu.style.display = "block";
+}
+
+function ocultar_menu(){
+
+    nav.style.right = "-250px";
+    background_menu.style.display = "none";
+}
+
+
+    </script>
+    <div>
+<div>
+    <canvas id="myChart"  width="20" height="5"></canvas>
+  </div>
+  <script>
+    const labels = [
+      'January',
+      'January',
+    ];
+  
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Sistema nuevo',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [1,10],
+      }]
+    };
+  
+    const config = {
+      type: 'line',
+      data: data,
+      options: { }
+    };
+  </script>
+<script>
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+</div>
+
+<div>
+    <div>
+        <canvas id="myChart1"  width="20" height="5"></canvas>
+      </div>
+      <script>
+        const labels1 = [
+          'January',
+          'January1',
+        ];
+      
+        const data1 = {
+          labels: labels1,
+          datasets: [{
+            label: 'Sistema antiguo',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [1,10],
+          }]
+        };
+      
+        const config1 = {
+          type: 'line',
+          data: data1,
+          options: { }
+        };
+      </script>
+    <script>
+        const myChart1 = new Chart(
+          document.getElementById('myChart1'),
+          config1
+        );
+      </script>
+    </div>
+
+    <div>
+        <div>
+            <canvas id="myChart2"  width="20" height="5"></canvas>
+          </div>
+          <script>
+            const labels2 = [
+              'January',
+              'January1',
+            ];
+          
+            const data2 = {
+              labels: labels2,
+              datasets: [{
+                label: 'Bateria',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [1,10],
+              }]
+            };
+          
+            const config2 = {
+              type: 'line',
+              data: data2,
+              options: { }
+            };
+          </script>
+        <script>
+            const myChart2 = new Chart(
+              document.getElementById('myChart2'),
+              config2
+            );
+          </script>
+        </div>
+
+        <div>
+            <div>
+                <canvas id="myChart3"  width="20" height="5"></canvas>
+              </div>
+              <script>
+                const labels3 = [
+                  'January',
+                  'January1',
+                ];
+              
+                const data3 = {
+                  labels: labels3,
+                  datasets: [{
+                    label: 'viento',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [1,10],
+                  }]
+                };
+              
+                const config3 = {
+                  type: 'line',
+                  data: data3,
+                  options: { }
+                };
+              </script>
+            <script>
+                const myChart3 = new Chart(
+                  document.getElementById('myChart3'),
+                  config3
+                );
+              </script>
+            </div>
+    
+      
+</body>
+</html>
