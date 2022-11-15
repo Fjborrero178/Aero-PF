@@ -25,8 +25,8 @@ app.use('/Datos', require('./route/Datos.js'));
 
   
 
-app.listen(80, () => {
-  console.log("server listening on port", 80);
+app.listen(process.env.PORT, () => {
+  console.log("server listening on port", process.env.PORT||3000);
 });
 //MIDDLEWARE
 
