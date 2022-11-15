@@ -54,33 +54,38 @@ function ocultar_menu(){
     <canvas id="myChart"  width="20" height="5"></canvas>
   </div>
   <script>
-    const labels = [
+     fetch('/envio')
+    .then(response => response.json())
+    .then(json => {
+      var x = json;
+      const labels = [
       'January',
       'January',
     ];
-  
-    const data = {
+      const data = {
       labels: labels,
       datasets: [{
         label: 'Sistema nuevo',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [1,10],
-      }]
-    };
-  
+        data: [x],
+            }]
+          };
+          
     const config = {
       type: 'line',
       data: data,
       options: { }
     };
-  </script>
-<script>
     const myChart = new Chart(
       document.getElementById('myChart'),
       config
     );
+      console.log(x)
+  });
+
   </script>
+
 </div>
 
 <div>
