@@ -60,10 +60,10 @@ function ocultar_menu(){
      fetch('/envio')
     .then(response => response.json())
     .then(json => {
-      var mode = json.Modo;
-      const labels = [
-      'January',
-      'January',
+      var moden = json.Modonew;
+      var Hour = json.currentHour;
+      var labels = [
+      Hour
     ];
       const data = {
       labels: labels,
@@ -71,7 +71,7 @@ function ocultar_menu(){
         label: 'Sistema nuevo',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [mode],
+        data: [moden],
             }]
           };
           
@@ -84,7 +84,7 @@ function ocultar_menu(){
       document.getElementById('myChart'),
       config
     );
-      console.log(mode)
+      console.log(moden)
   });
 
   </script>
@@ -101,8 +101,9 @@ function ocultar_menu(){
          fetch('/envio')
     .then(response => response.json())
     .then(json => {
-      var bat = json.Bateria;
-        const labels1 = [
+      var old = json.Modoold;
+      var Hour = json.currentHour;
+        var labels1 = [Hour
           
         ];
       
@@ -112,7 +113,7 @@ function ocultar_menu(){
             label: 'Sistema antiguo',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [bat],
+            data: [old],
           }]
         };
       
@@ -139,12 +140,12 @@ function ocultar_menu(){
               .then(response => response.json())
               .then(json => {
               var bat = json.Bateria;
-              const labels2 = [
-              'January',
-              'January1',
+              var Hour = json.currentHour;
+              var labels2 = [
+              Hour
             ];
           
-            const data2 = {
+            var data2 = {
               labels: labels2,
               datasets: [{
                 label: 'Bateria',
@@ -178,12 +179,12 @@ function ocultar_menu(){
                   .then(response => response.json())
                   .then(json => {
                   var wind = json.Viento;
-                const labels3 = [
-                  'January',
-                  'January1',
+                  var Hour = json.currentHour;
+                var labels3 = [
+                 Hour
                 ];
               
-                const data3 = {
+                var data3 = {
                   labels: labels3,
                   datasets: [{
                     label: 'viento',
@@ -206,31 +207,5 @@ function ocultar_menu(){
               });
               </script>
             </div>
-    <script>
-      function actual() {
-         fecha=new Date(); //Actualizar fecha.
-         hora=fecha.getHours(); //hora actual
-         minuto=fecha.getMinutes(); //minuto actual
-         segundo=fecha.getSeconds(); //segundo actual
-         if (hora<10) { //dos cifras para la hora
-            hora="0"+hora;
-            }
-         if (minuto<10) { //dos cifras para el minuto
-            minuto="0"+minuto;
-            }
-         if (segundo<10) { //dos cifras para el segundo
-            segundo="0"+segundo;
-            }
-         //ver en el recuadro del reloj:
-         mireloj = hora+" : "+minuto+" : "+segundo;	
-				 return mireloj; 
-         }
-function actualizar() { //función del temporizador
-   mihora=actual(); //recoger hora actual
-   console.log(mihora)
-	 }
-setInterval(actualizar,1000); 
-    </script>
-      
 </body>
 </html>

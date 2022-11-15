@@ -6,26 +6,31 @@ const config = require('dotenv').config();
 const router = express.Router();
 //express.use(express.json());
 //express.use(express.text());
-var Modo = "";
+var Modoold = "";
 var Bateria ="";
 var Viento ="";
 var Fecha ="";
 var Hora ="";
+var Modonew="";
 
 const app = express();
 
 const datosSchema = new mongoose.Schema({
-  Modo: {
+  Modonew: {
     type: String,
-    required: true,
+    //required: true,
+  },
+  Modoold: {
+    type: String,
+    //required: true,
   },
   Bateria: {
     type: String,
-    required: true,
+    //required: true,
   },
   Viento: {
     type: String,
-    required: true,
+    //required: true,
   },
   Fecha: {
     type: String,
@@ -43,20 +48,27 @@ app.get("/", async(req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-app.get('/envio', (req, res) => {
+let currentDate = new Date().toJSON().slice(0, 10);
+console.log(currentDate);
+
+let currentHour = new Date().toJSON().slice(11, 23);
+console.log(currentHour);
+
+
+app.get('/envio', async(req, res) => {
   var vamos = {
-    Modo: Modo, // Modo
+    Modonew: Modonew, // Modo
+    Modoold:Modoold,
     Bateria: Bateria, // Bateria
     Viento: Viento, // Viento
-    Fecha: Fecha,
-    Hora:Hora
-  }
+    Fecha: currentDate,
+    Hora:currentHour
+  } 
     var Proceso = new datos (vamos);
-    //res.json([Proceso.Bateria])
-    //await Proceso.save();
+    res.json([Proceso])
+    await Proceso.save();
     console.log(Proceso)
     res.json(Proceso);
-//{data : 'example'}
 })
 
 
@@ -85,6 +97,3 @@ uri = `mongodb+srv://${process.env.usuario}:${process.env.password}@cluster0.stq
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(()=> console.log('conectado a mongodb')) 
   .catch(e => console.log('error de conexión', e))
-
-
-  // Reloj 
