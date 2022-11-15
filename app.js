@@ -55,7 +55,7 @@ let currentHour = new Date().toJSON().slice(11, 23);
 console.log(currentHour);
 
 
-app.get('/envio', async(req, res) => {
+app.get('/envio', (req, res) => {
   var vamos = {
     Modonew: Modonew, // Modo
     Modoold:Modoold,
@@ -65,8 +65,8 @@ app.get('/envio', async(req, res) => {
     Hora:currentHour
   } 
     var Proceso = new datos (vamos);
-    res.json([Proceso])
-    await Proceso.save();
+    //res.json([Proceso])
+    //await Proceso.save();
     console.log(Proceso)
     res.json(Proceso);
 })
