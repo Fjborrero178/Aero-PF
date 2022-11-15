@@ -11,8 +11,10 @@
     
 </head>
 <body>
-    <header>
-
+    <header> 
+        <h1 >Monitorizacion de datos Aero</h1>
+    
+  
         <div class="container__menu">
             <div class="menu">
                 <i class="fas fa-bars" id="btn_menu"></i>
@@ -49,15 +51,16 @@ function ocultar_menu(){
 
 
     </script>
-    <div>
+    <div class="modoa">
 <div>
+  <h1 class="tamaño">Modo de operacion nuevo </h1>
     <canvas id="myChart"  width="20" height="5"></canvas>
   </div>
   <script>
      fetch('/envio')
     .then(response => response.json())
     .then(json => {
-      var x = json;
+      var mode = json.Modo;
       const labels = [
       'January',
       'January',
@@ -68,7 +71,7 @@ function ocultar_menu(){
         label: 'Sistema nuevo',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [x],
+        data: [mode],
             }]
           };
           
@@ -81,7 +84,7 @@ function ocultar_menu(){
       document.getElementById('myChart'),
       config
     );
-      console.log(x)
+      console.log(mode)
   });
 
   </script>
@@ -90,12 +93,17 @@ function ocultar_menu(){
 
 <div>
     <div>
+      <h1 class="tamaño">Modo de operacion antiguo</h1>
         <canvas id="myChart1"  width="20" height="5"></canvas>
       </div>
       <script>
+        
+         fetch('/envio')
+    .then(response => response.json())
+    .then(json => {
+      var bat = json.Bateria;
         const labels1 = [
-          'January',
-          'January1',
+          
         ];
       
         const data1 = {
@@ -104,7 +112,7 @@ function ocultar_menu(){
             label: 'Sistema antiguo',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [1,10],
+            data: [bat],
           }]
         };
       
@@ -113,21 +121,25 @@ function ocultar_menu(){
           data: data1,
           options: { }
         };
-      </script>
-    <script>
         const myChart1 = new Chart(
           document.getElementById('myChart1'),
           config1
         );
+    });
       </script>
     </div>
 
     <div>
         <div>
+          <h1 class="tamaño">Estado de la Bateria</h1>
             <canvas id="myChart2"  width="20" height="5"></canvas>
           </div>
           <script>
-            const labels2 = [
+             fetch('/envio')
+              .then(response => response.json())
+              .then(json => {
+              var bat = json.Bateria;
+              const labels2 = [
               'January',
               'January1',
             ];
@@ -138,7 +150,7 @@ function ocultar_menu(){
                 label: 'Bateria',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [1,10],
+                data: [bat],
               }]
             };
           
@@ -147,20 +159,25 @@ function ocultar_menu(){
               data: data2,
               options: { }
             };
-          </script>
-        <script>
+        
             const myChart2 = new Chart(
               document.getElementById('myChart2'),
               config2
             );
+          });
           </script>
         </div>
 
         <div>
             <div>
+              <h1 class="tamaño">Estado del voltaje con respecto al viento</h1>
                 <canvas id="myChart3"  width="20" height="5"></canvas>
               </div>
               <script>
+                 fetch('/envio')
+                  .then(response => response.json())
+                  .then(json => {
+                  var wind = json.Viento;
                 const labels3 = [
                   'January',
                   'January1',
@@ -172,7 +189,7 @@ function ocultar_menu(){
                     label: 'viento',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: [1,10],
+                    data: [wind],
                   }]
                 };
               
@@ -181,15 +198,39 @@ function ocultar_menu(){
                   data: data3,
                   options: { }
                 };
-              </script>
-            <script>
+              
                 const myChart3 = new Chart(
                   document.getElementById('myChart3'),
                   config3
                 );
+              });
               </script>
             </div>
-    
+    <script>
+      function actual() {
+         fecha=new Date(); //Actualizar fecha.
+         hora=fecha.getHours(); //hora actual
+         minuto=fecha.getMinutes(); //minuto actual
+         segundo=fecha.getSeconds(); //segundo actual
+         if (hora<10) { //dos cifras para la hora
+            hora="0"+hora;
+            }
+         if (minuto<10) { //dos cifras para el minuto
+            minuto="0"+minuto;
+            }
+         if (segundo<10) { //dos cifras para el segundo
+            segundo="0"+segundo;
+            }
+         //ver en el recuadro del reloj:
+         mireloj = hora+" : "+minuto+" : "+segundo;	
+				 return mireloj; 
+         }
+function actualizar() { //función del temporizador
+   mihora=actual(); //recoger hora actual
+   console.log(mihora)
+	 }
+setInterval(actualizar,1000); 
+    </script>
       
 </body>
 </html>

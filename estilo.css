@@ -14,6 +14,8 @@ header{
     margin-top: 40px;
     position: fixed;
     z-index: 1;
+    text-align: Center;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .container__menu{
@@ -59,14 +61,15 @@ header{
 .menu #btn_menu{
     display: none;
 }
-
-
+.modoa{
+    padding-top: 10%;
+}
 /*Haciendo la página Responsive*/
 
 @media screen and (max-width:1200px){
 
     header{
-        padding: 40px;
+        padding-top: -150%;
     }
 
 }
@@ -137,5 +140,10 @@ header{
     .menu #btn_menu:hover{
         background: rgba(67, 4, 168, 0.808);
     }
+    .tamaño{
+        font-size: 16px;
+        padding-top: 15%;
+    }
 }
+
 
