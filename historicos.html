@@ -118,20 +118,9 @@ function ocultar_menu(){
             inicio = document.getElementById('start').value;
             final = document.getElementById('stop').value;
             
-            const info = {
-              fecha_inicio: inicio.slice(0, 10),
-              hora_inicio: inicio.slice(11, 16),
-              fecha_fin: final.slice(0, 10),
-              hora_fin: final.slice(11, 16)
-            }  
+           
             const buscarOCrear = async () => {
-    const post = await Publicaciones.find(
-       
-        {
-            Fecha: {${'fecha_inicio'},
-            author: mongoose.Types.ObjectId("6021150a1f183b248c8a8e3f")
-        },
-        )
+  
 
     console.log('****** BUSCAR O CREAR **********', post);
 }          
