@@ -65,9 +65,9 @@ app.get('/envio', async(req, res) => {
     Hora:currentHour
   } 
   var Proceso = new datos (vamos);
-  //   await Proceso.save();
+    await Proceso.save();
     console.log(Proceso)
-    res.json(Proceso);
+    return promise.res.json(Proceso);
 })
 
 // // app.get('/',async(req,res) =>{
