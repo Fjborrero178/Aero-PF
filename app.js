@@ -55,7 +55,7 @@ let currentHour = new Date().toJSON().slice(11, 23);
 console.log(currentHour);
 
 
-app.get('/envio', (req, res) => {
+app.get('/envio', async(req, res) => {
   var vamos = {
     Modonew: Modonew, // Modo
     Modoold:Modoold,
@@ -64,16 +64,19 @@ app.get('/envio', (req, res) => {
     Fecha: currentDate,
     Hora:currentHour
   } 
-    var Proceso = new datos (vamos);
-    //res.json([Proceso])
-    //await Proceso.save();
+  var Proceso = new datos (vamos);
+  //   await Proceso.save();
     console.log(Proceso)
     res.json(Proceso);
 })
 
-
-
-
+// // app.get('/',async(req,res) =>{
+// //   var Proceso = new datos (vamos);
+// //     res.json([Proceso])
+// //     await Proceso.save();
+// //     console.log(Proceso)
+// //     res.json(Proceso);
+// // })
 
 app.get("/historicos", (req, res) => {
     res.sendFile(path.join(__dirname + "/historicos.html"));
@@ -81,6 +84,10 @@ app.get("/historicos", (req, res) => {
 
 app.get("/estilo.css", (req, res) => {
     res.sendFile(path.join(__dirname + "/estilo.css"));
+});
+
+app.get("/estilohist.css", (req, res) => {
+  res.sendFile(path.join(__dirname + "/estilohist.css"));
 });
 
 //app.use('/Datos', require('./route/Datos.js'));
