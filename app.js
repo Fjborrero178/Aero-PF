@@ -67,7 +67,7 @@ app.get('/envio', async(req, res) => {
   var Proceso = new datos (vamos);
     await Proceso.save();
     console.log(Proceso)
-    return promise.res.json(Proceso);
+    return Promise.res.json(Proceso);
 })
 
 // // app.get('/',async(req,res) =>{
