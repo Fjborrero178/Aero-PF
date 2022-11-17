@@ -71,14 +71,16 @@ app.post('/envio', async(req, res) => {
     Fecha: currentDate,
     Hora:currentHour
   } 
+  
 
   var Proceso = new datos (vamos);
-    //await Proceso.save();
-    console.log(Proceso)
-    res.json(Proceso);
+    await Proceso.save();
 })
 
 
+app.get('/envio', async(req, res) => {
+  res.json(vamos);
+ });
 
 
 app.post('/hist', async(req,res) => {
