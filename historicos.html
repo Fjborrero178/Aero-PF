@@ -49,10 +49,10 @@ function ocultar_menu(){
     </script>
     <div class="buscador">
         <label class="inlineclass" style="width: 140px; padding-left: 10px;" for="start">Inicio:</label>
-        <input class="inlineclass" style="text-align: center;" type="datetime-local" id="start" onchange="changehist()" name="InitialHistoric" value="2022-03-30T00:00" min="2022-03-20T00:00" max="2023-04-01T00:00">
+        <input class="inlineclass" style="text-align: center;" type="datetime-local" id="start"  name="InitialHistoric" value="2022-03-30T00:00" min="2022-03-20T00:00" max="2023-04-01T00:00">
     
         <label class="inlineclass" style="width: 140px; padding-left: 10px;" for="stop">Fin:</label>
-        <input class="inlineclass" style="text-align: center;" type="datetime-local" id="stop" onchange="changehist()" name="FinalHistoric" value="2022-03-30T10:00" min="2022-03-20T00:01" max="2023-04-01T00:00">
+        <input class="inlineclass" style="text-align: center;" type="datetime-local" id="stop"  name="FinalHistoric" value="2022-03-30T10:00" min="2022-03-20T00:01" max="2023-04-01T00:00">
         <div class="button" id="busbut">
             <button class="centrado"onclick="enviarhist()">Buscar</button>
           </div>
@@ -86,7 +86,10 @@ function ocultar_menu(){
                     hora_inicio: inicio.slice(11, 16),
                     fecha_fin: final.slice(0, 10),
                     hora_fin: final.slice(11, 16)
-                  };
+                  }
+                  
+
+
                   const options = {
                       method: 'POST',
                       headers: {
@@ -94,8 +97,10 @@ function ocultar_menu(){
                       },
                       body: JSON.stringify(info)
                     };
-                    console.log(info);
+                  
+                  
                     const content = await fetch('/hist', options);
+                    console.log(content);
                     const data = await content.json();
                     
                     
@@ -104,18 +109,19 @@ function ocultar_menu(){
                     const bateri = [];
                     const vien = [];
                     const hou = [];
-                    const hour = [""];
+                    const hour = [];
 
                     if (data.data.length !== 0) {
 
-                    const modo11 = info.modo1;
-                    const modo22 = info.modo1;
-                    const bateri1 = info.bateri;
-                    const vien1 = info.vien;
-                    const hourl2 = info.hou;
-                    const hour1 = info.hour;
+                     modo11 = info.modo1;
+                     modo22 = info.modo1;
+                     bateri1 = info.bateri;
+                     vien1 = info.vien;
+                     hourl2 = info.hou;
+                     hour1 = info.hour;
                     }
-                    console.log(hour1);
+                     console.log(modo11);
+
                   }
 
                </script>
@@ -126,7 +132,7 @@ function ocultar_menu(){
       </div>
       <script>
           const labels = [
-          hour1
+          "2"
         ];
           const data = {
           labels: labels,
@@ -134,7 +140,7 @@ function ocultar_menu(){
             label: 'Sistema nuevo',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [modo11],
+            data: ["2"],
                 }]
               };
               
@@ -147,8 +153,7 @@ function ocultar_menu(){
           document.getElementById('myChart'),
           config
         );
-          console.log(moden)
-    
+          
       </script>
     </div>
     
@@ -160,7 +165,7 @@ function ocultar_menu(){
           <script>
             
            
-            var labels1 = [hour1];
+            var labels1 = ["2"];
           
             const data1 = {
               labels: labels1,
@@ -168,7 +173,7 @@ function ocultar_menu(){
                 label: 'Sistema antiguo',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [modo22],
+                data: ["2"],
               }]
             };
           
@@ -192,7 +197,7 @@ function ocultar_menu(){
               </div>
               <script>
                   var labels2 = [
-                  hour1
+                  "2"
                 ];
               
                 var data2 = {
@@ -201,7 +206,7 @@ function ocultar_menu(){
                     label: 'Bateria',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: [bateri1],
+                    data: ["2"],
                   }]
                 };
               
@@ -225,7 +230,7 @@ function ocultar_menu(){
                   </div>
                   <script>
                     var labels3 = [
-                    hour1
+                    "2"
                     ];
                   
                     var data3 = {
@@ -234,7 +239,7 @@ function ocultar_menu(){
                         label: 'viento',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: [vien1],
+                        data: ["2"],
                       }]
                     };
                   

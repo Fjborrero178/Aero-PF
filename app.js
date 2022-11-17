@@ -1,12 +1,13 @@
+const http = require('http');
 const express = require("express");
 const path = require("path");
 const mongoose = require('mongoose');
 //const Datos = require("./models/datos.js");
 const config = require('dotenv').config();
 const router = express.Router();
-//var MongoClient = require('mongodb').MongoClient;
-//express.use(express.json());
-//express.use(express.text());
+const SocketIO = require('socket.io')
+
+
 var Modoold = "";
 var Bateria ="";
 var Viento ="";
@@ -79,15 +80,16 @@ app.post('/hist', async(req,res) => {
    var Person = mongoose.model('datos', datosSchema);
  
    const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
-   const query = Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
+   const info = Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
 
 
-    query.exec(function (err, person) {
+    info.exec(function (err, person) {
     if (err) return handleError(err);
     // Prints "Space Ghost is a talk show host."
-    console.log(person);
+    //console.log(person);
 });
-    console.log(req.body);
+    //console.log(req.body);
+    res.json({data: info});
   });
 
 
@@ -106,10 +108,10 @@ app.get("/estilohist.css", (req, res) => {
 //app.use('/Datos', require('./route/Datos.js'));
 
   
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log("server listening on port", process.env.PORT||3000);
 });
-//MIDDLEWARE
+//MIDDLEWARES
 
 //DATA BASE
 uri = `mongodb+srv://${process.env.usuario}:${process.env.password}@cluster0.stqjv43.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`;
@@ -117,3 +119,16 @@ uri = `mongodb+srv://${process.env.usuario}:${process.env.password}@cluster0.stq
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(()=> console.log('conectado a mongodb')) 
   .catch(e => console.log('error de conexión', e))
+
+//WEBSOCKET
+// const io = SocketIO(server);
+
+// io.on('conection',(socket) =>{
+//   console.log(socket.id);
+
+//   socket.on('conection',() =>{
+//     console.log('se ha desconectado');
+
+//   });
+
+// });
