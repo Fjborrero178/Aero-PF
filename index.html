@@ -60,6 +60,8 @@ function ocultar_menu(){
     var modens = [];
     var currentHours =[];
     var labels=[];
+    let myChart;
+
     setInterval(() => {
   console.log("Delayed for 1 second.");
 
@@ -85,7 +87,10 @@ function ocultar_menu(){
       data: data,
       options: { }
     };
-    const myChart = new Chart(
+        if (myChart) {
+            myChart.destroy();
+        }
+       myChart = new Chart(
       document.getElementById('myChart'),
       config
     );
