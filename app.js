@@ -61,7 +61,8 @@ console.log(currentHour);
 
 
 app.post('/envio', async(req, res) => {
-  const { Modonew, Modoold, Bateria, Viento}
+  // const { Modonew, Modoold, Bateria, Viento}
+  console.log(req.params);
   var vamos = {
     Modonew: Modonew, // Modo
     Modoold:Modoold,
@@ -70,6 +71,7 @@ app.post('/envio', async(req, res) => {
     Fecha: currentDate,
     Hora:currentHour
   } 
+
   var Proceso = new datos (vamos);
     //await Proceso.save();
     console.log(Proceso)
