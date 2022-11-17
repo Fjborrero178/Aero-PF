@@ -9,7 +9,7 @@ const config = require('dotenv').config();
 const router = express.Router();
 
 
-
+var vamos = { Modonew:"",Modoold:"",bateria:"",viento:""};
 var Modoold = "";
 var Bateria ="";
 var Viento ="";
@@ -63,7 +63,7 @@ console.log(currentHour);
 app.post('/envio', async(req, res) => {
    const { bateria, viento,q1,q2} = req.body
   console.log(req.body);
-  var vamos = {
+   vamos = {
     Modonew: q1, // Modo
     Modoold:q2,
     Bateria: bateria, // Bateria
