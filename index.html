@@ -57,21 +57,23 @@ function ocultar_menu(){
     <canvas id="myChart"  width="20" height="5"></canvas>
   </div>
   <script>
+    var modens = [];
+    var currentHours =[];
+    var labels=[];
      fetch('/envio')
     .then(response => response.json())
     .then(json => {
-      var moden = json.Modonew;
-      var Hour = json.currentHour;
-      var labels = [
-      Hour
-    ];
+      console.log(json);
+      modens.push(json.Modonew);
+      currentHours.push(json.currentHour);
+      labels.push(json.label);
       const data = {
       labels: labels,
       datasets: [{
         label: 'Sistema nuevo',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [moden],
+        data: modens,
             }]
           };
           
