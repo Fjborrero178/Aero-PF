@@ -62,7 +62,7 @@ console.log(currentHour);
 
 app.post('/envio', async(req, res) => {
   // const { Modonew, Modoold, Bateria, Viento}
-  console.log(req.params);
+  console.log(req.body);
   var vamos = {
     Modonew: Modonew, // Modo
     Modoold:Modoold,
