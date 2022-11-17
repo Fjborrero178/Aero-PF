@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 //const Datos = require("./models/datos.js");
 const config = require('dotenv').config();
 const router = express.Router();
+//var MongoClient = require('mongodb').MongoClient;
 //express.use(express.json());
 //express.use(express.text());
 var Modoold = "";
@@ -14,6 +15,7 @@ var Hora ="";
 var Modonew="";
 
 const app = express();
+app.use(express.json());
 
 const datosSchema = new mongoose.Schema({
   Modonew: {
@@ -44,7 +46,7 @@ const datosSchema = new mongoose.Schema({
 
 const datos = mongoose.model("datos", datosSchema);
 
-app.get("/", async(req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
@@ -65,18 +67,29 @@ app.get('/envio', async(req, res) => {
     Hora:currentHour
   } 
   var Proceso = new datos (vamos);
-    await Proceso.save();
+    //await Proceso.save();
     console.log(Proceso)
-    return res.json(Proceso);
+    res.json(Proceso);
 })
 
-// // app.get('/',async(req,res) =>{
-// //   var Proceso = new datos (vamos);
-// //     res.json([Proceso])
-// //     await Proceso.save();
-// //     console.log(Proceso)
-// //     res.json(Proceso);
-// // })
+
+
+
+app.post('/hist', async(req,res) => {
+   var Person = mongoose.model('datos', datosSchema);
+ 
+   const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
+   const query = Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
+
+
+    query.exec(function (err, person) {
+    if (err) return handleError(err);
+    // Prints "Space Ghost is a talk show host."
+    console.log(person);
+});
+    console.log(req.body);
+  });
+
 
 app.get("/historicos", (req, res) => {
     res.sendFile(path.join(__dirname + "/historicos.html"));

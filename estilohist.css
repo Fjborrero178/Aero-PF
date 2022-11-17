@@ -11,7 +11,7 @@
 header{
     width: 100%;
     height: 80px;
-    margin-top: 40px;
+    margin-top: 20px;
     position: fixed;
     z-index: 1;
     text-align: Center;
@@ -65,10 +65,15 @@ header{
     padding-top: 5%;
 }
 .buscador{
-    padding-top: 10%;
+    padding-top: 15%;
     padding-left: 35%;
     font-family: 'Source Sans Pro', sans-serif;
 }
+
+.button{
+    padding-right: 1000%;
+}
+
 /*Haciendo la página Responsive*/
 
 @media screen and (max-width:1200px){
@@ -150,7 +155,7 @@ header{
         padding-top: 15%;
     }
     .buscador{
-        padding-top: 25%;
+        padding-top: 15%;
     }
 }
 
