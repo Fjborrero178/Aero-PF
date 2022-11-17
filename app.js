@@ -60,7 +60,7 @@ let currentHour = new Date().toJSON().slice(11, 23);
 console.log(currentHour);
 
 
-app.get('/envio', async(req, res) => {
+app.post('/envio', async(req, res) => {
   var vamos = {
     Modonew: Modonew, // Modo
     Modoold:Modoold,
@@ -84,7 +84,7 @@ app.post('/hist', async(req,res) => {
    const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
    const info = await Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
     //console.log(req.body);
-    send.json({data:info});
+    res.json({data:info});
   });
 
 

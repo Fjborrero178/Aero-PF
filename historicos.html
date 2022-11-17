@@ -96,11 +96,17 @@ function ocultar_menu(){
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify(info)
-                    };
+                    }
+                    .then(res => {
+                        return res.json()
+
+                                          })
+                      .then(info => console.log(info))
+                          .catch(error => console.log('ERROR'))
                   
                   
-                    var content = await fetch('/hist', options);
-                    var data =  await content.json();
+                    const content = fetch ('/hist', options);
+                    const data =  await content.json();
                     
                     console.log(data);  
                                       
