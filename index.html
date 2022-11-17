@@ -60,6 +60,9 @@ function ocultar_menu(){
     var modens = [];
     var currentHours =[];
     var labels=[];
+    setTimeout(() => {
+  console.log("Delayed for 1 second.");
+
      fetch('/envio')
     .then(response => response.json())
     .then(json => {
@@ -86,9 +89,9 @@ function ocultar_menu(){
       document.getElementById('myChart'),
       config
     );
-      console.log(moden)
+  
   });
-
+}, 2000)
   </script>
 
 </div>
