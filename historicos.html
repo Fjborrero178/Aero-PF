@@ -99,11 +99,11 @@ function ocultar_menu(){
                     };
                   
                   
-                    const content = await fetch('/hist', options);
-                    console.log(content);
-                    const data = await content.json();
+                    var content = await fetch('/hist', options);
+                    var data =  await content.json();
                     
-                    
+                    console.log(data);  
+                                      
                     const modo1 = [];
                     const modo2 = [];
                     const bateri = [];
@@ -113,14 +113,14 @@ function ocultar_menu(){
 
                     if (data.data.length !== 0) {
 
-                     modo11 = info.modo1;
-                     modo22 = info.modo1;
-                     bateri1 = info.bateri;
-                     vien1 = info.vien;
-                     hourl2 = info.hou;
-                     hour1 = info.hour;
+                      const modo11 = info.modo1;
+                      const modo22 = info.modo1;
+                      const bateri1 = info.bateri;
+                      const vien1 = info.vien;
+                      const hourl2 = info.hou;
+                      const hour1 = info.hour;
                     }
-                     console.log(modo11);
+                    // console.log(modo11);
 
                   }
 

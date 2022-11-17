@@ -1,11 +1,13 @@
-const http = require('http');
 const express = require("express");
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
 const path = require("path");
 const mongoose = require('mongoose');
 //const Datos = require("./models/datos.js");
 const config = require('dotenv').config();
 const router = express.Router();
-const SocketIO = require('socket.io')
+
 
 
 var Modoold = "";
@@ -15,7 +17,7 @@ var Fecha ="";
 var Hora ="";
 var Modonew="";
 
-const app = express();
+
 app.use(express.json());
 
 const datosSchema = new mongoose.Schema({
@@ -80,16 +82,9 @@ app.post('/hist', async(req,res) => {
    var Person = mongoose.model('datos', datosSchema);
  
    const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
-   const info = Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
-
-
-    info.exec(function (err, person) {
-    if (err) return handleError(err);
-    // Prints "Space Ghost is a talk show host."
-    //console.log(person);
-});
+   const info = await Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
     //console.log(req.body);
-    res.json({data: info});
+    send.json({data:info});
   });
 
 
@@ -108,7 +103,7 @@ app.get("/estilohist.css", (req, res) => {
 //app.use('/Datos', require('./route/Datos.js'));
 
   
-const server = app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log("server listening on port", process.env.PORT||3000);
 });
 //MIDDLEWARES
@@ -119,16 +114,3 @@ uri = `mongodb+srv://${process.env.usuario}:${process.env.password}@cluster0.stq
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(()=> console.log('conectado a mongodb')) 
   .catch(e => console.log('error de conexión', e))
-
-//WEBSOCKET
-// const io = SocketIO(server);
-
-// io.on('conection',(socket) =>{
-//   console.log(socket.id);
-
-//   socket.on('conection',() =>{
-//     console.log('se ha desconectado');
-
-//   });
-
-// });
