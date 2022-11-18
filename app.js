@@ -56,7 +56,8 @@ app.get("/", (req, res) => {
 let currentDate = new Date().toJSON().slice(0, 10);
 console.log(currentDate);
 
-let currentHour = new Date().toJSON().slice(11, 23);
+
+let currentHour = new Date().toJSON().slice(11, 19);
 console.log(currentHour);
 
 
@@ -87,10 +88,11 @@ app.post('/hist', async(req,res) => {
    var Person = mongoose.model('datos', datosSchema);
    
    const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
-   const info = await Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
+   const info = await Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:( hora_inicio), $lt:( hora_fin) }}]} );
     //console.log(info);
     //console.log({data:info}); 
-    res.json({data:info});
+    console.log(info);
+    res.json(info);
 
   });
 
