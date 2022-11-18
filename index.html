@@ -68,7 +68,6 @@ function ocultar_menu(){
      fetch('/envio')
     .then(response => response.json())
     .then(json => {
-      console.log(json);
       modens.push(parseFloat(json.Modonew));
       currentHours.push(json.currentHour);
       labels.push(json.label);
@@ -78,7 +77,7 @@ function ocultar_menu(){
         label: 'Sistema nuevo',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: modens,
+        data: [modens]
             }]
           };
           
@@ -94,7 +93,6 @@ function ocultar_menu(){
       document.getElementById('myChart'),
       config
     );
-  console.log(modens);
   });
 }, 2000)
   </script>
