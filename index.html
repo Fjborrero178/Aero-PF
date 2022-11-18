@@ -73,7 +73,7 @@ function ocultar_menu(){
     .then(json => {
       modens.push(parseFloat(json.Modonew));
       currentHours.push(json.currentHour);
-      labels.push(parseFloat(json.label));     
+      labels.push(parseInt(json.label));     
   });
   const data = {
       labels: labels,
