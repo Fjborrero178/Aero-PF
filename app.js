@@ -53,16 +53,20 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-let currentDate = new Date().toJSON().slice(0, 10);
+var now = new Date();
+
+
+var currentDate = new Date().toJSON().slice(11, 19);
 console.log(currentDate);
 
 
-let currentHour = new Date().toJSON().slice(11, 19);
+var currentHour = now.toJSON().slice(11, 19);
 console.log(currentHour);
 
 
+
 app.post('/envio', async(req, res) => {
-   const { bateria, viento,q1,q2} = req.body
+   const { bateria, viento,q1,q2, currentHour} = req.body
   console.log(req.body);
    vamos = {
     Modonew: q1, // Modo
