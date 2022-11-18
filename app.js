@@ -85,11 +85,13 @@ app.get('/envio', async(req, res) => {
 
 app.post('/hist', async(req,res) => {
    var Person = mongoose.model('datos', datosSchema);
- 
+   
    const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
    const info = await Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:(hora_inicio), $lt:(hora_fin) }}]} );
-    //console.log(req.body);
+    //console.log(info);
+    //console.log({data:info}); 
     res.json({data:info});
+
   });
 
 

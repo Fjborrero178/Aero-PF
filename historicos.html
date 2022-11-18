@@ -97,36 +97,31 @@ function ocultar_menu(){
                       },
                       body: JSON.stringify(info)
                     }
-                    .then(res => {
-                        return res.json()
-
-                                          })
-                      .then(info => console.log(info))
-                          .catch(error => console.log('ERROR'))
-                  
-                  
-                    const content = fetch ('/hist', options);
-                    const data =  await content.json();
                     
-                    console.log(data);  
-                                      
+              
+                    const respond= await fetch ('/hist', options);
+                    const data = await respond.json();
+                               
+
                     const modo1 = [];
                     const modo2 = [];
                     const bateri = [];
                     const vien = [];
-                    const hou = [];
+                    const dat = [];
                     const hour = [];
 
                     if (data.data.length !== 0) {
-
-                      const modo11 = info.modo1;
-                      const modo22 = info.modo1;
-                      const bateri1 = info.bateri;
-                      const vien1 = info.vien;
-                      const hourl2 = info.hou;
-                      const hour1 = info.hour;
+                     data.data.forEach(element => {
+                      modo1.push(element.Modonew);
+                      modo2.push(element.Modoold);
+                      bateri.push(element.Bateria);
+                      vien.push(element.Viento);
+                      dat.push(element.Fecha);
+                      hour.push(element.Hora);
+                    });
+                     
                     }
-                    // console.log(modo11);
+                     console.log(modo1);
 
                   }
 
