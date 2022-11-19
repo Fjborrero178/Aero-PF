@@ -103,24 +103,24 @@ function ocultar_menu(){
                     const data = await respond.json();
                                
 
-                    const modo1 = [];
+                    var modo1 = [];
                     const modo2 = [];
                     const bateri = [];
                     const vien = [];
                     const dat = [];
-                    const hour = [];
+                    var hour = [];
 
-                    // if (data.data.length !== 0) {
-                    //  data.data.forEach(element => {
-                    //   modo1.push(element.Modonew);
-                    //   modo2.push(element.Modoold);
-                    //   bateri.push(element.Bateria);
-                    //   vien.push(element.Viento);
-                    //   dat.push(element.Fecha);
-                    //   hour.push(element.Hora);
-                    // });
+                   if (data.data > 0){
+                      data.data.forEach(element => {
+                      modo1.push(element.Modonew);
+                      modo2.push(element.Modoold);
+                      bateri.push(element.Bateria);
+                      vien.push(element.Viento);
+                      dat.push(element.Fecha);
+                      hour.push(element.Hora);
+                    });
                      
-                    //}
+                    }
                      console.log(data);
 
                   }
@@ -132,28 +132,31 @@ function ocultar_menu(){
         <canvas id="myChart"  width="20" height="5"></canvas>
       </div>
       <script>
-          const labels = [
-          push(modo1)
-        ];
+      
+          
           const data = {
-          labels: labels,
-          datasets: [{
-            label: 'Sistema nuevo',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [push(modo1)],
-                }]
-              };
-              
-        const config = {
-          type: 'line',
-          data: data,
-          options: { }
-        };
-        const myChart = new Chart(
-          document.getElementById('myChart'),
-          config
-        );
+            datasets: [{
+              label: 'Sistema antiguo',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: modo1,
+              labels: hour
+
+            }]
+          };
+        
+          const config = {
+            type: 'line',
+            data: data,
+
+            options: { }
+          };
+          const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+          );
+      
+        </script>
           
       </script>
     </div>

@@ -55,13 +55,14 @@ app.get("/", (req, res) => {
 
 var now = new Date();
 
+var rightNow = new Date();
+var currentHour = rightNow.toISOString().replace("", "").split("T")
+console.log(currentHour);
 
-    var currentDate = new Date().toJSON().slice(0,10);
-      console.log(currentDate);
 
 
-    var currentHour = now.toJSON().slice(11,19);
-    console.log(currentHour);
+    // var currentHour = now.toJSON().slice(11,19);
+    // console.log(currentHour);
 
 app.post('/envio', async(req, res) => {
    const { bateria, viento,q1,q2, currentHour} = req.body
@@ -74,7 +75,7 @@ app.post('/envio', async(req, res) => {
     Fecha: currentDate,
     Hora:currentHour
   } 
-  
+  console.log(vamos);
 
   var Proceso = new datos (vamos);
     await Proceso.save();
