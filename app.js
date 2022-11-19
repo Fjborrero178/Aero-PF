@@ -65,6 +65,7 @@ console.log(currentHour);
     // console.log(currentHour);
 
 app.post('/envio', async(req, res) => {
+  
    const { bateria, viento,q1,q2, currentHour} = req.body
   console.log(req.body);
    vamos = {
