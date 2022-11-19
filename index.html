@@ -78,7 +78,7 @@ function ocultar_menu(){
     .then(json => {
       modens.push(parseFloat(json.Modonew));
       currentHours.push(json.currentHour);
-      labels.push(json.labels);     
+      labels.push(json.currentHour);     
   });
   const data = {
       labels: labels,
@@ -97,6 +97,9 @@ function ocultar_menu(){
        scales: {
         x:{
         type: 'time',
+        time: {
+          unit: 'second'
+        }
         }
        }
     }
