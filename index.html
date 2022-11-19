@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="/path/to/c3.css" rel="stylesheet">
-    <script src="/path/to/d3.v5.min.js" charset="utf-8"></script>
-    <script src="/path/to/c3.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
     <link rel="stylesheet" href="estilo.css">
     <title>Inicio</title>
     
@@ -60,6 +64,7 @@ function ocultar_menu(){
     <canvas id="myChart"  width="20" height="5"></canvas>
   </div>
   <script>
+    
     var modens = [];
     var currentHours =[];
     var labels=[];
@@ -73,7 +78,7 @@ function ocultar_menu(){
     .then(json => {
       modens.push(parseFloat(json.Modonew));
       currentHours.push(json.currentHour);
-      labels.push(parseInt(json.label));     
+      labels.push(json.labels);     
   });
   const data = {
       labels: labels,
@@ -88,8 +93,14 @@ function ocultar_menu(){
     const config = {
       type: 'line',
       data: data,
-      options: { }
-    };
+      options: {
+       scales: {
+        x:{
+        type: 'time',
+        }
+       }
+    }
+          }
         if (myChart) {
             myChart.destroy();
         }
@@ -187,40 +198,6 @@ function ocultar_menu(){
             <div>
               <h1 class="tamaño">Estado del voltaje con respecto al viento</h1>
               </div>
-              <script>
-              var chart = c3.generate({
-    data: {
-        columns: [
-            ['data1', 30, 200, 100, 400, 150, 250],
-            ['data2', 50, 20, 10, 40, 15, 25]
-        ]
-    }
-});
-
-setTimeout(function () {
-    chart.load({
-        columns: [
-            ['data1', 230, 190, 300, 500, 300, 400]
-        ]
-    });
-}, 1000);
-
-setTimeout(function () {
-    chart.load({
-        columns: [
-            ['data3', 130, 150, 200, 300, 200, 100]
-        ]
-    });
-}, 1500);
-
-setTimeout(function () {
-    chart.unload({
-        ids: 'data1'
-    });
-}, 2000);
-
-            </script>
-
             </div>
 </body>
 </html>
