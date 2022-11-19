@@ -56,14 +56,12 @@ app.get("/", (req, res) => {
 var now = new Date();
 
 
-var currentDate = new Date().toJSON().slice(11, 19);
-console.log(currentDate);
+    var currentDate = new Date().toJSON().slice(0,10);
+      console.log(currentDate);
 
 
-var currentHour = now.toJSON().slice(11, 19);
-console.log(currentHour);
-
-
+    var currentHour = now.toJSON().slice(11,19);
+    console.log(currentHour);
 
 app.post('/envio', async(req, res) => {
    const { bateria, viento,q1,q2, currentHour} = req.body

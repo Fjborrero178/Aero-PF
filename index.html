@@ -65,9 +65,15 @@ function ocultar_menu(){
   </div>
   <script>
     
+    
+
+
+
+
+
     var modens = [];
     var currentHours =[];
-    var labels=[];
+    var labelss=[];
     let myChart;
 
     setInterval(() => {
@@ -77,11 +83,10 @@ function ocultar_menu(){
     .then(response => response.json())
     .then(json => {
       modens.push(parseFloat(json.Modonew));
-      currentHours.push(json.currentHour);
-      labels.push(json.currentHour);     
+      labelss.push(json.currentHour);     
   });
   const data = {
-      labels: labels,
+      labels: labelss,
       datasets: [{
         label: 'Sistema nuevo',
         backgroundColor: 'rgb(255, 99, 132)',
@@ -98,7 +103,7 @@ function ocultar_menu(){
         x:{
         type: 'time',
         time: {
-          unit: 'second'
+          unit: 'millisecond'
         }
         }
        }
