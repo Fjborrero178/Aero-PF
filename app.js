@@ -4,6 +4,7 @@ const http = require('http');
 const server = http.createServer(app);
 const path = require("path");
 const mongoose = require('mongoose');
+const { Console } = require("console");
 //const Datos = require("./models/datos.js");
 const config = require('dotenv').config();
 const router = express.Router();
@@ -53,21 +54,27 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-var now = new Date();
+//var now = new Date();
 
-var rightNow = new Date();
-var currentHour = rightNow.toISOString().replace("", "").split("T")
-console.log(currentHour);
+//var rightNow = new Date();
+//var currentHour = rightNow.toISOString().replace("", "").split("T")
+//console.log(currentHour);
 
 
 
     // var currentHour = now.toJSON().slice(11,19);
     // console.log(currentHour);
 
+    var now = new Date();
+
+    var currentDate = new Date().toJSON().slice(0, 10);
+    
+    var currentHour = now.toJSON().slice(11, 19);
+
+
 app.post('/envio', async(req, res) => {
 
    const { bateria, viento,q1,q2 } = req.body
-  console.log(req.body);
    vamos = {
     Modonew: q1, // Modo
     Modoold:q2,
@@ -76,7 +83,6 @@ app.post('/envio', async(req, res) => {
     Fecha: currentDate,
     Hora:currentHour
   } 
-  console.log(vamos);
 
   var Proceso = new datos (vamos);
     await Proceso.save();
@@ -93,12 +99,18 @@ app.post('/hist', async(req,res) => {
    var Person = mongoose.model('datos', datosSchema);
    
    const { fecha_inicio, hora_inicio, fecha_fin, hora_fin } = req.body;
-   const info = await Person.find({ Fecha: { $gt:(fecha_inicio), $lt:(fecha_fin) }, $and:[{Hora:{ $gt:( hora_inicio), $lt:( hora_fin) }}]} );
+    const info = await Person.find({ 
+        Fecha: {$gt:(fecha_inicio), $lt:(fecha_fin)},
+        Hora: {$gt:( hora_inicio), $lt:( hora_fin) }
+    });
+
+
     //console.log(info);
     //console.log({data:info}); 
+    console.log('---------------SENDING HIST DATA------------------')
     console.log(info);
     res.json(info);
-
+    console.log('---------------------END TRANSMISSION ------------------------')
   });
 
 

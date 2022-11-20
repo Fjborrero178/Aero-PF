@@ -99,7 +99,7 @@ function ocultar_menu(){
                     }
                     
               
-                    const respond= await fetch ('/hist', options);
+                    const respond = await fetch ('/hist', options);
                     const data = await respond.json();
                                
 
@@ -110,14 +110,14 @@ function ocultar_menu(){
                     const dat = [];
                     var hour = [];
 
-                   if (data.data > 0){
-                      data.data.forEach(element => {
-                      modo1.push(element.Modonew);
-                      modo2.push(element.Modoold);
-                      bateri.push(element.Bateria);
-                      vien.push(element.Viento);
-                      dat.push(element.Fecha);
-                      hour.push(element.Hora);
+                   if (data !== 0){
+                      data.forEach(element => {
+                        modo1.push(element.Modonew);
+                        modo2.push(element.Modoold);
+                        bateri.push(element.Bateria);
+                        vien.push(element.Viento);
+                        dat.push(element.Fecha);
+                        hour.push(element.Hora);
                     });
                      
                     }
@@ -136,7 +136,7 @@ function ocultar_menu(){
           
           const data = {
             datasets: [{
-              label: 'Sistema antiguo',
+              label: 'Sistema nuevo',
               backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
               data: modo1,
