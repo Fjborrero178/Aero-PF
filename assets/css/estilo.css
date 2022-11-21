@@ -80,7 +80,7 @@ header{
         position: fixed;
         top: 0;
         right: -250px;
-        background:  rgba(67, 4, 168, 0.808);
+        background:  #F6615D;
         width: 250px;
         height: 100vh;
         padding: 40px;
@@ -138,7 +138,7 @@ header{
     }
 
     .menu #btn_menu:hover{
-        background: rgba(67, 4, 168, 0.808);
+        background: #F6615D;
     }
     .tamaño{
         font-size: 16px;
