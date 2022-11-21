@@ -1,263 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="estilohist.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/41bcea2ae3.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="assets/css/estilohist.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Historicos</title>
-    
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1 >Historicos Aero</h1>
-        <div class="container__menu">
-            <div class="menu">
-                <i class="fas fa-bars" id="btn_menu"></i>
-                <div id="back_menu"></div>
-                <nav id="nav">
-                    <ul>
-                        <li><a href="../" id="selected">Inicio</a></li>
-                        <li><a href="../historicos">Historicos</a></li>
-                    </ul>
-                </nav>
-            </div>
+      <h1>Historicos Aero</h1>
+      <div class="container__menu">
+        <div class="menu">
+          <i class="fas fa-bars" id="btn_menu"></i>
+          <div id="back_menu"></div>
+          <nav id="nav">
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="historicos.html" id="selected">Historicos</a></li>
+            </ul>
+          </nav>
         </div>
-
-    </header>
-    <script>
-        document.getElementById("btn_menu").addEventListener("click", mostrar_menu);
-
-document.getElementById("back_menu").addEventListener("click", ocultar_menu);
-
-nav = document.getElementById("nav");
-background_menu = document.getElementById("back_menu");
-
-function mostrar_menu(){
-
-    nav.style.right = "0px";
-    background_menu.style.display = "block";
-}
-
-function ocultar_menu(){
-
-    nav.style.right = "-250px";
-    background_menu.style.display = "none";
-}
-    </script>
-    <div class="buscador">
-        <label class="inlineclass" style="width: 140px; padding-left: 10px;" for="start">Inicio:</label>
-        <input class="inlineclass" style="text-align: center;" type="datetime-local" id="start"  name="InitialHistoric" value="2022-03-30T00:00" min="2022-03-20T00:00" max="2023-04-01T00:00">
-    
-        <label class="inlineclass" style="width: 140px; padding-left: 10px;" for="stop">Fin:</label>
-        <input class="inlineclass" style="text-align: center;" type="datetime-local" id="stop"  name="FinalHistoric" value="2022-03-30T10:00" min="2022-03-20T00:01" max="2023-04-01T00:00">
-        <div class="button" id="busbut">
-            <button class="centrado"onclick="enviarhist()">Buscar</button>
-          </div>
-            </div>
-            
-            <script>
-               
-                //Calendario
-                 window.addEventListener('load', function () {
-                   inicio = document.getElementById('start');
-                   inicio.addEventListener('change', function () { 
-                     if (document.getElementById('stop').value < this.value) { 
-                       document.getElementById('stop').value = this.value;
-                     }
-                   });
-                   final = document.getElementById('stop');
-                   final.addEventListener('change', function () {
-                     if (document.getElementById('start').value > this.value) {
-                       this.value = document.getElementById('start').value;
-                     }
-                   });
-                 });
-
-
-                  async function enviarhist() {
-                    inicio = document.getElementById('start').value;
-                    final = document.getElementById('stop').value;
-                    
-                    var info = {
-                    fecha_inicio: inicio.slice(0, 10),
-                    hora_inicio: inicio.slice(11, 16),
-                    fecha_fin: final.slice(0, 10),
-                    hora_fin: final.slice(11, 16)
-                  }
-                  
-
-
-                  const options = {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify(info)
-                    }
-                    
-              
-                    const respond = await fetch ('/hist', options);
-                    const data = await respond.json();
-                               
-
-                    var modo1 = [];
-                    const modo2 = [];
-                    const bateri = [];
-                    const vien = [];
-                    const dat = [];
-                    var hour = [];
-
-                   if (data !== 0){
-                      data.forEach(element => {
-                        modo1.push(element.Modonew);
-                        modo2.push(element.Modoold);
-                        bateri.push(element.Bateria);
-                        vien.push(element.Viento);
-                        dat.push(element.Fecha);
-                        hour.push(element.Hora);
-                    });
-                     
-                    }
-                     console.log(data);
-
-                  }
-
-               </script>
-<div class="modoa">
-    <div>
-      <h1 class="tamaño">Modo de operacion nuevo </h1>
-        <canvas id="myChart"  width="20" height="5"></canvas>
       </div>
-      <script>
-      
-          
-          const data = {
-            datasets: [{
-              label: 'Sistema nuevo',
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: modo1,
-              labels: hour
+    </header>
+    <div class="buscador">
+      <label
+        class="inlineclass"
+        style="width: 140px; padding-left: 10px"
+        for="start"
+        >Inicio:</label
+      >
+      <input
+        class="inlineclass"
+        style="text-align: center"
+        type="datetime-local"
+        id="start"
+        name="InitialHistoric"
+        value="2022-03-30T00:00"
+        min="2022-03-20T00:00"
+        max="2023-04-01T00:00"
+      />
 
-            }]
-          };
-        
-          const config = {
-            type: 'line',
-            data: data,
-
-            options: { }
-          };
-          const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-          );
-      
-        </script>
-          
-      </script>
+      <label
+        class="inlineclass"
+        style="width: 140px; padding-left: 10px"
+        for="stop"
+        >Fin:</label
+      >
+      <input
+        class="inlineclass"
+        style="text-align: center"
+        type="datetime-local"
+        id="stop"
+        name="FinalHistoric"
+        value="2022-03-30T10:00"
+        min="2022-03-20T00:01"
+        max="2023-04-01T00:00"
+      />
+      <div class="button" id="busbut">
+        <button class="centrado" onclick="enviarhist()">Buscar</button>
+      </div>
     </div>
-    
+
+    <div class="modoa">
+      <div>
+        <h1 class="tamaño">Modo de operacion nuevo</h1>
+        <canvas id="myChart" width="20" height="5"></canvas>
+      </div>
+    </div>
+
     <div>
-        <div>
-          <h1 class="tamaño">Modo de operacion antiguo</h1>
-            <canvas id="myChart1"  width="20" height="5"></canvas>
-          </div>
-          <script>
-            
-           
-            var labels1 = ["2"];
-          
-            const data1 = {
-              labels: labels1,
-              datasets: [{
-                label: 'Sistema antiguo',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: ["2"],
-              }]
-            };
-          
-            const config1 = {
-              type: 'line',
-              data: data1,
-              options: { }
-            };
-            const myChart1 = new Chart(
-              document.getElementById('myChart1'),
-              config1
-            );
-        
-          </script>
-        </div>
-    
-        <div>
-            <div>
-              <h1 class="tamaño">Estado de la Bateria</h1>
-                <canvas id="myChart2"  width="20" height="5"></canvas>
-              </div>
-              <script>
-                  var labels2 = [
-                  "2"
-                ];
-              
-                var data2 = {
-                  labels: labels2,
-                  datasets: [{
-                    label: 'Bateria',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: ["2"],
-                  }]
-                };
-              
-                const config2 = {
-                  type: 'line',
-                  data: data2,
-                  options: { }
-                };
-            
-                const myChart2 = new Chart(
-                  document.getElementById('myChart2'),
-                  config2
-                );
-              </script>
-            </div>
-    
-            <div>
-                <div>
-                  <h1 class="tamaño">Estado del voltaje con respecto al viento</h1>
-                    <canvas id="myChart3"  width="20" height="5"></canvas>
-                  </div>
-                  <script>
-                    var labels3 = [
-                    "2"
-                    ];
-                  
-                    var data3 = {
-                      labels: labels3,
-                      datasets: [{
-                        label: 'viento',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        data: ["2"],
-                      }]
-                    };
-                  
-                    const config3 = {
-                      type: 'line',
-                      data: data3,
-                      options: { }
-                    };
-                  
-                    const myChart3 = new Chart(
-                      document.getElementById('myChart3'),
-                      config3
-                    );
-                  </script>
-                </div>
-</body>
+      <div>
+        <h1 class="tamaño">Modo de operacion antiguo</h1>
+        <canvas id="myChart1" width="20" height="5"></canvas>
+      </div>
+      <script></script>
+    </div>
+
+    <div>
+      <div>
+        <h1 class="tamaño">Estado de la Bateria</h1>
+        <canvas id="myChart2" width="20" height="5"></canvas>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <h1 class="tamaño">Estado del voltaje con respecto al viento</h1>
+        <canvas id="myChart3" width="20" height="5"></canvas>
+      </div>
+    </div>
+    <script src="assets/js/historicos.js"></script>
+  </body>
 </html>

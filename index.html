@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/41bcea2ae3.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -13,198 +16,59 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="assets/css/estilo.css" />
     <title>Inicio</title>
-    
-</head>
-<body>
-    <header> 
-        <h1 >Monitorizacion de datos Aero</h1>
-    
-  
-        <div class="container__menu">
-            <div class="menu">
-                <i class="fas fa-bars" id="btn_menu"></i>
-                <div id="back_menu"></div>
-                <nav id="nav">
-                    <ul>
-                        <li><a href="#" id="selected">Inicio</a></li>
-                        <li><a href="../historicos">Historicos</a></li>
-                    </ul>
-                </nav>
-            </div>
+  </head>
+  <body>
+    <header>
+      <h1>Monitorizacion de datos Aero</h1>
+
+      <div class="container__menu">
+        <div class="menu">
+          <i class="fas fa-bars" id="btn_menu"></i>
+          <div id="back_menu"></div>
+          <nav id="nav">
+            <ul>
+              <li><a href="#" id="selected">Inicio</a></li>
+              <li><a href="historicos.html">Historicos</a></li>
+            </ul>
+          </nav>
         </div>
-
-    </header>
-    <script>
-        document.getElementById("btn_menu").addEventListener("click", mostrar_menu);
-
-document.getElementById("back_menu").addEventListener("click", ocultar_menu);
-
-nav = document.getElementById("nav");
-background_menu = document.getElementById("back_menu");
-
-function mostrar_menu(){
-
-    nav.style.right = "0px";
-    background_menu.style.display = "block";
-}
-
-function ocultar_menu(){
-
-    nav.style.right = "-250px";
-    background_menu.style.display = "none";
-}
-
-
-    </script>
-    <div class="modoa">
-<div>
-  <h1 class="tamaño">Modo de operacion nuevo </h1>
-    <canvas id="myChart"  width="20" height="5"></canvas>
-  </div>
-  <script>
-    
-    var modens = [];
-    var currentHours =[];
-    var labelss=[];
-    let myChart;
-
-    setInterval(() => {
-  console.log("Delayed for 1 second.");
-
-     fetch('/envio')
-    .then(response => response.json())
-    .then(json => {
-      modens.push(parseFloat(json.Modonew));
-      currentHours.push(json.currentHour);
-      labelss.push(parseFloat(json.Hora));     
-  });
-   console.log(labelss);
-  const data = {
-      labels: labelss,
-      datasets: [{
-        label: 'Sistema nuevo',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [modens]
-            }]
-          };
-          
-    const config = {
-      type: 'line',
-      data: data,
-      options: {
-        options: {
-        scales: {
-            x: {
-                type: 'time',
-                time: {
-                    unit: 'second'
-                }
-            }
-            
-        }
-    }
-    }
-          }
-        if (myChart) {
-            myChart.destroy();
-        }
-       myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-    );
-    
-
-
-}, 2000)
-  </script>
-
-</div>
-
-<div>
-    <div>
-      <h1 class="tamaño">Modo de operacion antiguo</h1>
-        <canvas id="myChart1"  width="20" height="5"></canvas>
       </div>
-      <script>
-        
-         fetch('/envio')
-    .then(response => response.json())
-    .then(json => {
-      var old = json.Modoold;
-      var Hour = json.currentHour; 
-        var labels1 = [Hour
-          
-        ];
-      
-        var data1 = {
-          labels: labels1,
-          datasets: [{
-            label: 'Sistema antiguo',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [old],
-          }]
-        };
-      
-        const config1 = {
-          type: 'line',
-          data: data1,
-          options: { }
-        };
-        const myChart1 = new Chart(
-          document.getElementById('myChart1'),
-          config1
-        );
-    });
-      </script>
+    </header>
+
+ <!--   <script src="assets/js/headerIndex.js"></script> //-->
+
+    <div class="modonew">
+      <div>
+        <h1 class="tamaño">Modo de operacion nuevo</h1>
+        <canvas id="myChart" width="20" height="5"></canvas>
+      </div>     
+     <!--   <script src="assets/js/newModeIndex.js"></script> //-->
     </div>
 
     <div>
-        <div>
-          <h1 class="tamaño">Estado de la Bateria</h1>
-            <canvas id="myChart2"  width="20" height="5"></canvas>
-          </div>
-          <script>
-             fetch('/envio')
-              .then(response => response.json())
-              .then(json => {
-              var bat = json.Bateria;
-              var Hour = json.currentHour;
-              var labels2 = [
-              Hour
-            ];
-          
-            var data2 = {
-              labels: labels2,
-              datasets: [{
-                label: 'Bateria',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [bat],
-              }]
-            };
-          
-            const config2 = {
-              type: 'line',
-              data: data2,
-              options: { }
-            };
-        
-            const myChart2 = new Chart(
-              document.getElementById('myChart2'),
-              config2
-            );
-          });
-          </script>
-        </div>
+      <div class="modoOld">
+        <h1 class="tamaño">Modo de operacion antiguo</h1>
+        <canvas id="myChart1" width="20" height="5"></canvas>
+      </div>
+     <!-- <script src="assets/js/oldModeIndex.js"></script>//-->
+    </div>
 
-        <div>
-            <div>
-              <h1 class="tamaño">Estado del voltaje con respecto al viento</h1>
-              </div>
-            </div>
-</body>
+    <div>
+      <div class="batteryStatus">
+        <h1 class="tamaño">Estado de la Bateria</h1>
+        <canvas id="myChart2" width="20" height="5"></canvas>
+      </div>
+    </div>
+
+    <div>
+      <div class="volt">
+        <h1 class="tamaño">Estado del voltaje con respecto al viento</h1>
+        <canvas id="myChart3" width="20" height="5"></canvas>
+      </div>
+    </div>
+
+    <script src="assets/js/index.js"></script>
+  </body>
 </html>

@@ -21,6 +21,12 @@ var Modonew="";
 
 app.use(express.json());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 const datosSchema = new mongoose.Schema({
   Modonew: {
     type: String,
@@ -91,7 +97,12 @@ app.post('/envio', async(req, res) => {
 
 
 app.get('/envio', async(req, res) => {
-  res.json(vamos);
+
+  if(vamos.Modonew == "" && vamos.Modoold == "" && vamos.Bateria == "" && vamos.Viento == "" && vamos.Fecha == "" && vamos.Hora == ""){
+    res.send({status: "error", data: {message: "No hay datos"}});    
+  }else{
+    res.json(vamos);
+  }
  });
 
 
