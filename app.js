@@ -130,12 +130,21 @@ app.get("/historicos", (req, res) => {
   });
 
 app.get("/estilo.css", (req, res) => {
-    res.sendFile(path.join(__dirname + "/estilo.css"));
+    res.sendFile(path.join(__dirname + "/assets/css/estilo.css"));
 });
 
 app.get("/estilohist.css", (req, res) => {
-  res.sendFile(path.join(__dirname + "/estilohist.css"));
+  res.sendFile(path.join(__dirname + "/assets/css/estilohist.css"));
 });
+
+app.get("/index.js", (req,res) => {
+  res.sendFile(path.join(__dirname + "/assets/js/index.js"));
+});
+
+app.get("/historicos.js", (req,res) => {
+  res.sendFile(path.join(__dirname + "/assets/js/historicos.js"));
+});
+
 
 //app.use('/Datos', require('./route/Datos.js'));
 
