@@ -68,7 +68,7 @@ async function enviarhist() {
     body: JSON.stringify(info),
   };
 
-  const respond = await fetch("http://localhost:80/hist", options);
+  const respond = await fetch("http://ec2-54-91-98-42.compute-1.amazonaws.com:8000/hist", options);
   const data = await respond.json();
 
   if (data !== 0) {

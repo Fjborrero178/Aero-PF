@@ -8,6 +8,7 @@ const { Console } = require("console");
 //const Datos = require("./models/datos.js");
 const config = require('dotenv').config();
 const router = express.Router();
+const { DateTime } = require("luxon");
 
 
 var vamos = { Modonew:"",Modoold:"",bateria:"",viento:""};
@@ -71,12 +72,14 @@ app.get("/", (req, res) => {
     // var currentHour = now.toJSON().slice(11,19);
     // console.log(currentHour);
 
-    var now = new Date();
+    var now = DateTime.now().setZone('America/Bogota');
 
-    var currentDate = new Date().toJSON().slice(0, 10);
+    var currentDate = now.toFormat('yyyy-MM-dd');
     
-    var currentHour = now.toJSON().slice(11, 19);
+    var currentHour = now.toFormat('HH:mm:ss');
 
+    console.log(currentDate)
+    console.log(currentHour)
 
 app.post('/envio', async(req, res) => {
 

@@ -34,7 +34,7 @@ setInterval(() => {
 
   try {
 
-    fetch("http://localhost:80/envio")
+    fetch("http://ec2-54-91-98-42.compute-1.amazonaws.com:8000/envio")
     .then((response) => response.json())
     .then((json) => {
 
